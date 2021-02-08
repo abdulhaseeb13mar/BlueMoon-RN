@@ -1,0 +1,4 @@
+export default {
+  SET_CURRENT_BALL: 'SET_CURRENT_BALL',
+  SET_USER_INFO: 'SET_USER_INFO',
+};
