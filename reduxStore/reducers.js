@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import ActionTypes from './actionTypes';
 
-let currentBall = {};
+let currentProduct = {};
 
 let UserInfo = {
   firstname: '',
@@ -11,9 +11,9 @@ let UserInfo = {
   address: '',
 };
 
-const currentBallReducer = (state = currentBall, action) => {
+const currentProductReducer = (state = currentProduct, action) => {
   switch (action.type) {
-    case ActionTypes.SET_CURRENT_BALL:
+    case ActionTypes.SET_CURRENT_PRODUCT:
       state = Object.assign({}, state, {...action.payload});
       return state;
 
@@ -35,4 +35,7 @@ const UserInfoReducer = (state = UserInfo, action) => {
   return state;
 };
 
-export default combineReducers({currentBallReducer, UserInfoReducer});
+export default combineReducers({
+  currentProductReducer,
+  UserInfoReducer,
+});

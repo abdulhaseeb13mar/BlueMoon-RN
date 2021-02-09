@@ -24,7 +24,7 @@ export default function SearchBar(props) {
       </View>
       <TextInput
         style={styles.SB_input}
-        placeholder="Search Balls..."
+        placeholder="Search Lamps..."
         onBlur={() => ChangeFocus(false)}
         onFocus={() => ChangeFocus(true)}
         onChangeText={onChangeText}
@@ -41,14 +41,15 @@ const styles = StyleSheet.create({
     width: '10%',
   },
   SB_Wrapper: {
-    backgroundColor: '#f7f7ff',
+    backgroundColor: colors.secondary,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 8,
     borderRadius: 10,
     width: Measurements.width * 0.9,
     paddingHorizontal: 10,
+    height: Measurements.height * 0.07,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: {

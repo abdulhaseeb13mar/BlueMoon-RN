@@ -1,9 +1,9 @@
 import ActionTypes from './actionTypes';
 
-export const setCurrentBallAction = (paintingInfo) => {
+export const setCurrentProductAction = (paintingInfo) => {
   return async (dispatch) => {
     dispatch({
-      type: ActionTypes.SET_CURRENT_BALL,
+      type: ActionTypes.SET_CURRENT_PRODUCT,
       payload: paintingInfo,
     });
   };

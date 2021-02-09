@@ -12,11 +12,11 @@ import {connect} from 'react-redux';
 import WrapperScreen from '../Resuables/WrapperScreen';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Measurements} from '../Resuables/Measurement';
 import {colors} from '../Resuables/frequentColors';
 import {Button, Overlay} from 'react-native-elements';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 import {isFormValid} from '../Resuables/validation';
 import NavigationRef from '../Resuables/RefNavigation';
 import {setUserInfoAction} from '../reduxStore/actions';
@@ -35,7 +35,7 @@ const ConfirmOrder = (props) => {
   const [addressErrMsg, setAddressErrMsg] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const ball = props.ballInfo;
+  const product = props.product;
 
   const Hire = () => {
     const formValidResponse = isFormValid(
@@ -143,7 +143,7 @@ const ConfirmOrder = (props) => {
   const goBack = () => NavigationRef.GoBack();
 
   return (
-    <WrapperScreen style={{backgroundColor: 'white'}}>
+    <WrapperScreen style={{backgroundColor: colors.blueGray}}>
       <KeyboardAwareScrollView style={styles.container}>
         <View style={styles.headerWrapper}>
           <TouchableOpacity onPress={goBack}>
@@ -157,16 +157,18 @@ const ConfirmOrder = (props) => {
         <View style={styles.bookingDetailsCenterOverlay}>
           <View style={styles.bookingDetailsWrapper}>
             <ImageBackground
-              source={ball.images}
+              source={product.images}
               style={styles.TileImage}
               imageStyle={{borderRadius: 10}}
               resizeMode="contain"
             />
             <View style={styles.DetailWrapper}>
-              <Text style={styles.ProductName}>{ball.productName}</Text>
+              <Text style={styles.ProductName}>{product.productName}</Text>
               <View style={styles.detailInner2}>
-                <Text style={styles.detailprice}>${ball.price}</Text>
-                <Text style={styles.detailsize}>Size: {ball.size}</Text>
+                <Text style={styles.detailprice}>${product.price}</Text>
+                <Text style={styles.detailsize}>
+                  Quantity: {product.quantity}
+                </Text>
               </View>
             </View>
           </View>
@@ -184,8 +186,8 @@ const ConfirmOrder = (props) => {
               FIRST NAME <Text> {firstNameErrMsg}</Text>
             </Text>
             <View style={styles.personalInfoInputWrapper}>
-              <MaterialIcons
-                name="person"
+              <Feather
+                name="user"
                 size={Measurements.width * 0.07}
                 style={styles.inputIcon}
               />
@@ -205,8 +207,8 @@ const ConfirmOrder = (props) => {
               LAST NAME <Text> {lastNameErrMsg}</Text>
             </Text>
             <View style={styles.personalInfoInputWrapper}>
-              <MaterialIcons
-                name="person"
+              <Feather
+                name="user"
                 size={Measurements.width * 0.07}
                 style={styles.inputIcon}
               />
@@ -226,8 +228,8 @@ const ConfirmOrder = (props) => {
               EMAIL<Text> {emailErrMsg}</Text>
             </Text>
             <View style={styles.personalInfoInputWrapper}>
-              <MaterialIcons
-                name="email"
+              <Feather
+                name="mail"
                 size={Measurements.width * 0.07}
                 style={styles.inputIcon}
               />
@@ -247,8 +249,8 @@ const ConfirmOrder = (props) => {
               PHONE<Text> {phoneErrMsg}</Text>
             </Text>
             <View style={styles.personalInfoInputWrapper}>
-              <MaterialIcons
-                name="phone-iphone"
+              <Feather
+                name="phone"
                 size={Measurements.width * 0.07}
                 style={styles.inputIcon}
               />
@@ -269,18 +271,22 @@ const ConfirmOrder = (props) => {
               ADDRESS<Text> {addressErrMsg}</Text>
             </Text>
             <View style={styles.personalInfoInputWrapper}>
-              <MaterialIcons
-                name="location-pin"
+              <Feather
+                name="map-pin"
                 size={Measurements.width * 0.07}
                 style={{
                   ...styles.inputIcon,
                   alignSelf: 'flex-start',
-                  marginTop: 10,
+                  marginTop: Measurements.height * 0.01,
                 }}
               />
               <TextInput
                 placeholder="Address"
-                style={{...styles.Input, height: 100, textAlignVertical: 'top'}}
+                style={{
+                  ...styles.Input,
+                  height: Measurements.height * 0.12,
+                  textAlignVertical: 'top',
+                }}
                 multiline={true}
                 onChangeText={changeAddress}
               />
@@ -321,7 +327,7 @@ const ConfirmOrder = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    ballInfo: state.currentBallReducer,
+    product: state.currentProductReducer,
   };
 };
 
@@ -370,7 +376,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: Measurements.width * 0.8,
   },
-  confirmButtonContainer: {width: '100%', elevation: 5},
+  confirmButtonContainer: {
+    width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
   confirmButton: {
     backgroundColor: colors.primary,
     padding: Measurements.height * 0.018,
@@ -384,18 +400,21 @@ const styles = StyleSheet.create({
     marginBottom: Measurements.height * 0.02,
   },
   Input: {
-    width: '93%',
+    width: Measurements.width * 0.81,
     height: Measurements.height * 0.065,
   },
   inputIcon: {
-    width: '7%',
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    width: Measurements.width * 0.09,
     color: colors.primary,
   },
   personalInfoInputWrapper: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: 'white',
     paddingHorizontal: Measurements.width * 0.02,
     borderRadius: 5,
@@ -421,8 +440,8 @@ const styles = StyleSheet.create({
     marginHorizontal: Measurements.width * 0.035,
   },
   bookingDetailsWrapper: {
-    borderColor: '#edeef0',
-    borderWidth: 1,
+    borderColor: colors.primary,
+    borderWidth: 2,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
@@ -430,7 +449,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginVertical: Measurements.height * 0.01,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.blueGray,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -441,7 +460,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   ProductName: {
-    color: 'white',
+    color: colors.primary,
     fontSize: 18,
     fontWeight: 'bold',
     width: Measurements.width * 0.35,

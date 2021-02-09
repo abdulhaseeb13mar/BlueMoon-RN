@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import WrapperScreen from '../Resuables/WrapperScreen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -9,9 +9,9 @@ import Data from '../dummyData';
 import {Measurements} from '../Resuables/Measurement';
 import {colors} from '../Resuables/frequentColors';
 import NavigationRef from '../Resuables/RefNavigation';
-import {ProductTiles} from './Home';
+import {ExploreTile} from './Explore';
 import {connect} from 'react-redux';
-import {setCurrentBallAction} from '../reduxStore/actions';
+import {setCurrentProductAction} from '../reduxStore/actions';
 
 function Search(props) {
   const [searchText, setSearchText] = useState('');
@@ -20,21 +20,26 @@ function Search(props) {
     var SearchedItems = Data.product.filter((item) =>
       item.productName.toLowerCase().includes(searchText.toLowerCase()),
     );
-    return SearchedItems.length === 0 ? null : RenderTiles(SearchedItems);
+    return SearchedItems.length === 0 ? (
+      <Text style={{fontWeight: 'bold'}}>No Lamps Found...</Text>
+    ) : (
+      RenderTiles(SearchedItems)
+    );
   };
 
-  const TilePressed = (item) => {
-    props.setCurrentBallAction({
-      ...item,
-      catagoryName: Data.catagory[parseInt(item.catagoryId) - 1],
-    });
-    NavigationRef.Navigate('Products');
-  };
-
-  const RenderTiles = (BannerArr) => {
-    return BannerArr.map((item) => (
-      <ProductTiles key={item.id} item={item} TilePressed={TilePressed} />
+  const RenderTiles = (Arr) => {
+    return Arr.map((item) => (
+      <ExploreTile
+        key={item.id}
+        item={item}
+        GoToSingleProduct={GoToSingleProduct}
+      />
     ));
+  };
+
+  const GoToSingleProduct = (item) => {
+    props.setCurrentProductAction(item);
+    NavigationRef.Navigate('SingleProduct');
   };
 
   const goBack = () => NavigationRef.GoBack();
@@ -63,7 +68,7 @@ function Search(props) {
   );
 }
 
-export default connect(null, {setCurrentBallAction})(Search);
+export default connect(null, {setCurrentProductAction})(Search);
 
 const styles = StyleSheet.create({
   headerWrapper: {
@@ -77,7 +82,7 @@ const styles = StyleSheet.create({
   PaintingTilesWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     flexWrap: 'wrap',
   },

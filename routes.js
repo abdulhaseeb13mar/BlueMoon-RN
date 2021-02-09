@@ -6,9 +6,10 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import Navigator from './Resuables/RefNavigation';
 import Home from './Main/Home';
-import Products from './Main/Products';
+import SingleProduct from './Main/SingleProduct';
 import PersonalInfo from './Main/personalInfo';
-import SearchBalls from './Main/SearchBalls';
+import SearchLamps from './Main/SearchLamps';
+import Explore from './Main/Explore';
 
 const Stack = createStackNavigator();
 
@@ -25,9 +26,10 @@ function Routes(props) {
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         }}>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Products" component={Products} />
+        <Stack.Screen name="SingleProduct" component={SingleProduct} />
         <Stack.Screen name="PersonalInfo" component={PersonalInfo} />
-        <Stack.Screen name="SearchBalls" component={SearchBalls} />
+        <Stack.Screen name="SearchLamps" component={SearchLamps} />
+        <Stack.Screen name="Explore" component={Explore} />
       </Stack.Navigator>
     </NavigationContainer>
   );
