@@ -33,65 +33,59 @@ function Booking(props) {
 
   return (
     <WrapperScreen style={{backgroundColor: colors.secondary}}>
-      <ScrollView style={{flex: 1}}>
-        <View style={styles.pt_imgBackWrapper}>
-          <TouchableOpacity style={styles.crossWrapper} onPress={goBack}>
-            <Entypo
-              name="cross"
-              size={Measurements.width * 0.07}
-              color="black"
-            />
-          </TouchableOpacity>
-          <ImageBackground
-            source={product.images}
-            style={styles.pt_imageBackground}
-            imageStyle={{width: '100%'}}
-            resizeMode="contain"
-          />
-        </View>
-        <View style={styles.PD_1}>
-          <View style={styles.detailWrapper}>
-            <View style={styles.PD_2} />
-            <View style={styles.PD_3}>
-              <View>
-                <Text style={styles.PD_4}>{product.productName}</Text>
-                <View style={styles.PD_5}>
-                  <StarRating
-                    rating={product.raiting}
-                    size={Measurements.width * 0.25}
-                  />
-                  <Text style={styles.PD_6}>{product.raiting}</Text>
-                </View>
-              </View>
-              <View style={styles.PD_7}>
-                <TouchableOpacity onPress={decreaseItem} style={styles.PD_8}>
-                  <Entypo name="minus" color="white" size={20} />
-                </TouchableOpacity>
-                <Text style={styles.PD_9}>{noOfItem}</Text>
-                <TouchableOpacity onPress={increaseItem} style={styles.PD_10}>
-                  <Entypo name="plus" color="white" size={20} />
-                </TouchableOpacity>
+      <View style={styles.pt_imgBackWrapper}>
+        <TouchableOpacity style={styles.crossWrapper} onPress={goBack}>
+          <Entypo name="cross" size={Measurements.width * 0.07} color="black" />
+        </TouchableOpacity>
+        <ImageBackground
+          source={product.images}
+          style={styles.pt_imageBackground}
+          imageStyle={{width: '100%'}}
+          resizeMode="contain"
+        />
+      </View>
+      <View style={styles.PD_1}>
+        <View style={styles.detailWrapper}>
+          <View style={styles.PD_2} />
+          <View style={styles.PD_3}>
+            <View>
+              <Text style={styles.PD_4}>{product.productName}</Text>
+              <View style={styles.PD_5}>
+                <StarRating
+                  rating={product.raiting}
+                  size={Measurements.width * 0.25}
+                />
+                <Text style={styles.PD_6}>{product.raiting}</Text>
               </View>
             </View>
-            <Text style={styles.PD_11}>{product.discription}</Text>
-            <View style={styles.PD_12}>
-              <View style={styles.PD_13}>
-                <Text style={styles.PD_14}>${product.price}/</Text>
-                <Text style={styles.PD_15}>Price</Text>
-              </View>
-              <View>
-                <Button
-                  raised
-                  title="SHOP NOW"
-                  buttonStyle={styles.confirmButton}
-                  titleStyle={styles.buttonText}
-                  onPress={proceedToBookings}
-                />
-              </View>
+            <View style={styles.PD_7}>
+              <TouchableOpacity onPress={decreaseItem} style={styles.PD_8}>
+                <Entypo name="minus" color="white" size={20} />
+              </TouchableOpacity>
+              <Text style={styles.PD_9}>{noOfItem}</Text>
+              <TouchableOpacity onPress={increaseItem} style={styles.PD_10}>
+                <Entypo name="plus" color="white" size={20} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <Text style={styles.PD_11}>{product.discription}</Text>
+          <View style={styles.PD_12}>
+            <View style={styles.PD_13}>
+              <Text style={styles.PD_14}>${product.price}/</Text>
+              <Text style={styles.PD_15}>Price</Text>
+            </View>
+            <View>
+              <Button
+                raised
+                title="SHOP NOW"
+                buttonStyle={styles.confirmButton}
+                titleStyle={styles.buttonText}
+                onPress={proceedToBookings}
+              />
             </View>
           </View>
         </View>
-      </ScrollView>
+      </View>
     </WrapperScreen>
   );
 }
