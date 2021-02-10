@@ -274,19 +274,11 @@ const ConfirmOrder = (props) => {
               <Feather
                 name="map-pin"
                 size={Measurements.width * 0.07}
-                style={{
-                  ...styles.inputIcon,
-                  alignSelf: 'flex-start',
-                  marginTop: Measurements.height * 0.01,
-                }}
+                style={{...styles.inputIcon}}
               />
               <TextInput
                 placeholder="Address"
-                style={{
-                  ...styles.Input,
-                  height: Measurements.height * 0.12,
-                  textAlignVertical: 'top',
-                }}
+                style={{...styles.Input}}
                 multiline={true}
                 onChangeText={changeAddress}
               />
